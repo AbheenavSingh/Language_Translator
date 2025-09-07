@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.languagetranslator.languagetranslator.viewmodel.MyViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            tools:context=".view.fragments.SpeechFragment">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/speech_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_primary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="Speech Translator"
+                app:titleCentered="true"
+                app:titleTextColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/add_speech_view"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_margin="@dimen/_20sdp"
+                android:background="@drawable/round_image"
+                android:contentDescription="@string/mic_image_for_speak_the_text"
+                android:elevation="@dimen/_10sdp"
+                android:src="@drawable/ic_speech_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/speech_toolbar" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_15sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:text="@string/click_the_microphone_button_and_say_something"
+                app:layout_constraintEnd_toEndOf="@id/add_speech_view"
+                app:layout_constraintStart_toStartOf="@id/add_speech_view"
+                app:layout_constraintTop_toBottomOf="@id/add_speech_view" />
+
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_target_language"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_15sdp"
+                android:focusable="true"
+                android:minHeight="48dp"
+                android:paddingHorizontal="@dimen/_14sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/info" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/translate_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/button_background"
+                android:elevation="@dimen/_12sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:letterSpacing="0.1"
+                android:text="@string/translate"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toTopOf="@id/speech_translate_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/speech_text" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/speech_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_15sdp"
+                android:background="@drawable/input_background"
+                android:elevation="@dimen/_8sdp"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/say_something"
+                android:lines="5"
+                android:padding="@dimen/_12sdp"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_target_language"
+                tools:layout_editor_absoluteX="19dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/speech_translate_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_15sdp"
+                android:background="@drawable/input_background"
+                android:elevation="@dimen/_8sdp"
+                android:hint="@string/translation"
+                android:lines="5"
+                android:padding="@dimen/_12sdp"
+                android:text="@{viewModel.translationResult.toString()}"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintTop_toBottomOf="@+id/translate_button"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/speak_original_text"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_4sdp"
+                android:background="@drawable/play_pause_background"
+                android:contentDescription="@string/play_and_pause_speech"
+                android:elevation="@dimen/_8sdp"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/ic_play_24"
+                app:layout_constraintBottom_toBottomOf="@id/speech_text"
+                app:layout_constraintEnd_toEndOf="@id/speech_text" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/speak_translated_text"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_4sdp"
+                android:background="@drawable/play_pause_background"
+                android:contentDescription="@string/play_and_pause_speech_for_translated"
+                android:elevation="@dimen/_8sdp"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/ic_play_24"
+                app:layout_constraintBottom_toBottomOf="@id/speech_translate_text"
+                app:layout_constraintEnd_toEndOf="@id/speech_translate_text" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/_8sdp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/color_primary"
+                android:padding="@dimen/_10sdp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/speech_translate_text"
+                app:layout_constraintEnd_toEndOf="@id/speech_translate_text"
+                app:layout_constraintStart_toStartOf="@id/speech_translate_text"
+                app:layout_constraintTop_toTopOf="@id/speech_translate_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
